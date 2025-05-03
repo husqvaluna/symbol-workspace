@@ -1,5 +1,5 @@
 {
-  "name": "sdk",
+  "name": "learning-sdk-ts",
   "module": "index.ts",
   "type": "module",
   "private": true,
