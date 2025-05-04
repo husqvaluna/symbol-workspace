@@ -10,6 +10,10 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@types/msgpack-lite": "^0.1.11",
+    "cbor2": "^1.12.0",
+    "js-sha3": "^0.9.3",
+    "msgpack-lite": "^0.1.26",
     "symbol-sdk": "^3.2.3"
   }
 }

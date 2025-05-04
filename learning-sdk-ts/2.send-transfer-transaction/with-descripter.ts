@@ -22,7 +22,7 @@ const descriptor = new descriptors.TransferTransactionV1Descriptor(
 
 const transaction = facade.createTransactionFromTypedDescriptor(
   descriptor,
-  account.keyPair.publicKey,
+  account.publicKey,
   100,
   2 * 3600
 );

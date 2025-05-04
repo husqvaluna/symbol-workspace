@@ -30,11 +30,15 @@ const transaction = facade.createTransactionFromTypedDescriptor(
 /**
  * クライアントへ送信する文字列形式のペイロード。
  */
-const transactionPayload = transaction.serialize().toHex();
-const transactionHash = facade.hashTransaction(transaction).toString();
+const responseBody = {
+  payload: transaction.serialize().toHex(),
+  hash: facade.hashTransaction(transaction).toString(),
+}
 
 
 // ---- クライアントサイドで署名------------------------------------------------------
+
+const { payload: transactionPayload, hash: transactionHash } = responseBody;
 
 /**
  * サーバから受け取ったぺイロードからトランザクションを復元して、署名を行う。
@@ -53,15 +57,22 @@ const signature = account.signTransaction(restoredTransaction);
  * クライアントからサーバへ送信する署名済みのペイロード。
  */
 const jsonPayload = facade.transactionFactory.static.attachSignature(transaction, signature);;
+const objectPayload = JSON.parse(jsonPayload);
+
+const requestBody = {
+  payload: objectPayload['payload'],
+  signature: signature.toString(),
+}
 
 
 // ---- サーバサイドで検証 ------------------------------------------------------
 
+const { payload, signature: requestSignature } = requestBody;
+
 /**
- * JSON 形式のペイロードをデシリアライズして、トランザクションを復元する。
+ * 16進数形式のペイロードをデシリアライズして、トランザクションを復元する。
  * その復元したトランザクションが元のトランザクションと一致することを確認する。
  */
-const { payload } = JSON.parse(jsonPayload);
 const signedTransaction =  SymbolTransactionFactory.deserialize(hexToUint8(payload))
 
 // console.debug({
@@ -72,6 +83,7 @@ const signedTransaction =  SymbolTransactionFactory.deserialize(hexToUint8(paylo
 
 // サーバサイドで作成した内容と一致するのであれば、ユーザーによる承認を得たとして、
 // トランザクションを発信する。
+
 
 // ----------------------------------------------------------
 
