@@ -1,0 +1,15 @@
+{
+  "name": "learning-sdk-ts",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "symbol-sdk": "^3.2.3"
+  }
+}
