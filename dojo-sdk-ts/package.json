@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "dojo-sdk-ts",
+  "type": "module",
+  "scripts": {
+    "fmt": "biome format --write"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.1.2",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@noble/hashes": "^1.8.0",
+    "symbol-sdk": "^3.2.3"
+  }
+}
